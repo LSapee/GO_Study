@@ -12,7 +12,7 @@ func NewAccount(owner string) *Account {
 }
 
 //메소드
-func (a Account) Deposit(amount int) {
+func (a *Account) Deposit(amount int) {
 	a.balance += amount
 }
 
