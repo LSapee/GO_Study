@@ -9,10 +9,10 @@ import (
 		2.터미널에 go mod tidy
 		3. 확실하게 인포트 되면 import주소의 빨간줄이 없어진다.
 	*/
-	"github.com/Lsapee/GO_Study/banking"
+	"github.com/Lsapee/GO_Study/account"
 )
 
 func main() {
-	account := banking.Account{Owner: "jk", Balance: 20000}
+	account := account.NewAccount("jk")
 	fmt.Println(account)
 }
