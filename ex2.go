@@ -1,7 +1,7 @@
 package main
 
-import "goproject/Nomad_Coders/something"
+// import "goproject/Nomad_Coders/something"
 
-func main() {
-	something.SayBye()
-}
+// func main() {
+// 	something.SayBye()
+// }
