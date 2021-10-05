@@ -24,7 +24,7 @@ func (a Account) Balance() int {
 	return a.balance
 }
 
-func (a *Account) Whitdraw(amount int) error {
+func (a *Account) Withdraw(amount int) error {
 	if a.balance < amount {
 		return ErrNoMoney
 	}
