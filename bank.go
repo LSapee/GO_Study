@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"goproject/Nomad_Coders/accounts"
+
+	"github.com/Lsapee/GO_Study/accounts"
 )
 
 func main() {
