@@ -13,6 +13,9 @@ type Dictionary map[string]string
 
 //Search
 func (d Dictionary) Search(word string) (string, error) {
+	//value = d[word]
+	//value에 값이 존재하면 value와 nil을 반환하고
+	//value에 값이 없을 경우
 	value, exists := d[word]
 	if exists {
 		return value, nil

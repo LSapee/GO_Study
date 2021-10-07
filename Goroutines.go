@@ -19,13 +19,17 @@ package main
 // 	// fmt.Println("Waiting for messages")
 // 	// fmt.Println("Received this message: ", resultOne)
 // 	// fmt.Println("Received this message: ", resultTwo)
+
 // 	c := make(chan string)
 // 	people := [5]string{"jk", "je", "jl", "jm", "ju"}
 // 	for _, person := range people {
 // 		go sexyCount(person, c)
 // 	}
 
+// 	// 채널에 보낼 값 만큼 c<-를 적어줘야 한다.
+// 	// 이것을 계속 쓰는 것을 for 문을 돌려서 해결
 // 	for i := 0; i < len(people); i++ {
+// 		fmt.Print("waiting for", i)
 // 		fmt.Println(<-c)
 // 	}
 // }
