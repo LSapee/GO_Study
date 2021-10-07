@@ -24,7 +24,9 @@ func getPages() int {
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	checkErr(err)
 	fmt.Println(doc)
-	doc.Find(".pagination")
+	doc.Find(".pagination").Each(func(i int, s *goquery.Selection) {
+		fmt.Println(s.Html())
+	})
 	return 0
 }
 
