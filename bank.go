@@ -8,8 +8,8 @@ import (
 
 func main() {
 	account := accounts.NewAccount("jk")
-	account.Deposit(400)
-	err := accounts.Withdraw(30)
+	account.Deposit(10)
+	err := account.Withdraw(30)
 	if err != nil {
 		fmt.Println(err)
 	}
