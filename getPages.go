@@ -17,11 +17,11 @@ import (
 // 	summary  string
 // }
 
-var baseURL string = "https://kr.indeed.com/jobs?q=python&limit=50&start=0"
+var baseURL string = "https://kr.indeed.com/jobs?q=python&limit=50"
 
 func main() {
 	totalPages := getPages()
-	fmt.Println(totalPages)
+	// fmt.Println(totalPages)
 	for i := 0; i < totalPages; i++ {
 		getPage(i)
 	}
@@ -39,12 +39,11 @@ func getPage(page int) {
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	checkErr(err)
 
-	searchCards := doc.Find(".resultContent")
+	searchCards := doc.Find(".tapItem")
 
-	searchCards.Each(func(i int, s *goquery.Selection) {
-		title := s.Find("h2")
-		con := title.Find(".jobTitle>span").Text()
-		fmt.Println(con)
+	searchCards.Each(func(i int, card *goquery.Selection) {
+		id, _ := card.Attr("id")
+		fmt.Println(id)
 	})
 }
 
