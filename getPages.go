@@ -29,7 +29,7 @@ func main() {
 
 func getPage(page int) {
 	pageURL := baseURL + "&start=" + strconv.Itoa(page*50)
-	// fmt.Println("Requesting", pageURL
+	fmt.Println("Requesting", pageURL)
 	res, err := http.Get(pageURL)
 	checkErr(err)
 	checkCode(res)
@@ -43,7 +43,10 @@ func getPage(page int) {
 
 	searchCards.Each(func(i int, card *goquery.Selection) {
 		id, _ := card.Attr("id")
+		title := card.Find("h2>span").Text()
+
 		fmt.Println(id)
+		fmt.Println(title)
 	})
 }
 
