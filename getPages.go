@@ -44,9 +44,8 @@ func getPage(page int) {
 	searchCards.Each(func(i int, card *goquery.Selection) {
 		id, _ := card.Attr("id")
 		title := card.Find("h2>span").Text()
-
-		fmt.Println(id)
-		fmt.Println(title)
+		location := card.Find("div pre").Text()
+		fmt.Println(id, title, location)
 	})
 }
 
