@@ -9,6 +9,14 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+// type extractedJob struct {
+// 	id       string
+// 	title    string
+// 	location string
+// 	salary   string
+// 	summary  string
+// }
+
 var baseURL string = "https://kr.indeed.com/jobs?q=python&limit=50&start=0"
 
 func main() {
@@ -21,7 +29,23 @@ func main() {
 
 func getPage(page int) {
 	pageURL := baseURL + "&start=" + strconv.Itoa(page*50)
-	fmt.Println("Requesting", pageURL)
+	// fmt.Println("Requesting", pageURL
+	res, err := http.Get(pageURL)
+	checkErr(err)
+	checkCode(res)
+
+	defer res.Body.Close()
+
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	checkErr(err)
+
+	searchCards := doc.Find(".resultContent")
+
+	searchCards.Each(func(i int, s *goquery.Selection) {
+		title := s.Find("h2")
+		con := title.Find(".jobTitle>span").Text()
+		fmt.Println(con)
+	})
 }
 
 func getPages() int {
@@ -53,3 +77,7 @@ func checkCode(res *http.Response) {
 		log.Fatalln("Request failed with Status: ", res.StatusCode)
 	}
 }
+
+// func cleanString(str string) string {
+
+// }
