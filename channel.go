@@ -26,16 +26,18 @@ var baseURL string = "https://kr.indeed.com/jobs?q=python&limit=50"
 //실행 함수
 func main() {
 	var jobs []extractedJob
-	// 전체 페이지 수 만큼 불러오기
+	c := make(chan []extractedJob)
 	totalPages := getPages()
-	// fmt.Println(totalPages)
 
 	for i := 0; i < totalPages; i++ {
-		//전체 페이지수 만큼 반복해서 페이지 불러오기
-		extractedJob := getPage(i)
-		//배열 합칠때 뒤쪽에 ...달아주기
-		jobs = append(jobs, extractedJob...)
+		go getPage(i, c)
 	}
+
+	for i := 0; i < totalPages; i++ {
+		extractedJobs := <-c
+		jobs = append(jobs, extractedJobs...)
+	}
+
 	writeJobs(jobs)
 	fmt.Println("Done, extraced", len(jobs))
 }
@@ -59,7 +61,7 @@ func writeJobs(jobs []extractedJob) {
 	}
 }
 
-func getPage(page int) []extractedJob {
+func getPage(page int, mainC chan<- []extractedJob) {
 	c := make(chan extractedJob)
 	var jobs []extractedJob
 	// page당 url 변경 되는것
@@ -87,7 +89,7 @@ func getPage(page int) []extractedJob {
 		job := <-c
 		jobs = append(jobs, job)
 	}
-	return jobs
+	mainC <- jobs
 }
 
 func extractJob(card *goquery.Selection, c chan<- extractedJob) {
