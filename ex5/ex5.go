@@ -10,7 +10,9 @@ func lenAndUpper(name string) (lenght int, uppercase string) {
 	//defer은 함수가 다 실행된 후에 추가 실행됨
 	defer fmt.Println("I do it")
 	// 여기서 :=를 하지 않는 이유는 위에 lenght, uppercase는 선언 되어있다.
+	// name의 길이
 	lenght = len(name)
+	//name 을 대문자로
 	uppercase = strings.ToUpper(name)
 	return
 
@@ -18,6 +20,7 @@ func lenAndUpper(name string) (lenght int, uppercase string) {
 
 func main() {
 	fmt.Println("aaaa")
+	//lanAdUpper = lenght & up = uppercase
 	lanAndUpper, up := lenAndUpper("jk")
 	fmt.Println(lanAndUpper, up)
 }
